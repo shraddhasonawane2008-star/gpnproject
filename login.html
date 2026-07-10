@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal - GP Nashik Gymkhana</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the Login Page layout while keeping the main theme */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 40px 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 650px;
+            background-color: var(--bg-secondary, #1e1e2e);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .back-link {
+            margin-bottom: 24px;
+            display: inline-block;
+            color: var(--text-muted, #a6adc8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #818cf8;
+        }
+
+        .login-box h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-tag {
+            color: #818cf8;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        /* System Toggle Tabs */
+        .toggle-container {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.04);
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #a6adc8;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light, #cdd6f4);
+        }
+
+        .input-box input, .input-box select {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-light, #cdd6f4);
+            font-size: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .input-box select option {
+            background-color: #1e1e2e;
+            color: #ffffff;
+        }
+
+        .input-box input:focus, .input-box select:focus {
+            outline: none;
+            border-color: #6366f1;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Captcha Styling */
+        .captcha-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .captcha-display {
+            background: linear-gradient(135deg, #312e81, #4338ca);
+            color: #ffffff;
+            padding: 12px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 5px;
+            border-radius: 12px;
+            user-select: none;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border: 1px dashed rgba(255,255,255,0.3);
+        }
+
+        .refresh-captcha {
+            background: none;
+            border: none;
+            color: #818cf8;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .note {
+            margin-top: 25px;
+            color: var(--text-muted, #a6adc8);
+            text-align: center;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .form-footer {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted, #a6adc8);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .login-box {
+                padding: 25px;
+            }
+            .login-box h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="gpnashik_logo.png" alt="Government Polytechnic Nashik Logo">
+            <div>
+                <h1>शासकीय तंत्रनिकेतन, नाशिक</h1>
+                <p>(An Autonomous Institute of Government of Maharashtra)</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="login-box">
+            <a href="index.html" class="back-link">← BACK TO HOME</a>
+            
+            <h1>Gymkhana Portal</h1>
+            <div class="admin-tag">Gateway to Sports & Activities</div>
+
+            <!-- Explore System Navigation Tabs -->
+            <div class="toggle-container">
+                <button type="button" class="toggle-btn active" onclick="switchTab('admin-panel')">Admin Login</button>
+                <button type="button" class="toggle-btn" onclick="switchTab('explore-panel')">Explore System (Student Registration)</button>
+            </div>
+
+            <!-- ADMIN LOGIN FORM PANEL -->
+            <div id="admin-panel" class="form-panel active">
+                <form id="loginForm">
+                    <div class="row">
+                        <div class="input-box">
+                            <label for="username">Admin Username</label>
+                            <input type="text" id="username" placeholder="Enter username" required>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="email">College Email</label>
+                            <input type="email" id="email" placeholder="Enter email" required>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit" class="login-btn">ACCESS ADMIN PANEL →</button>
+                </form>
+                <div class="note">
+                    Only authorized Gymkhana administrators can access this portal. All login activities are monitored securely.
+                </div>
+            </div>
+
+            <!-- STUDENT REGISTRATION FORM PANEL (EXPLORE SYSTEM) -->
+            <div id="explore-panel" class="form-panel">
+                <form id="registrationForm">
+                    <div class="input-box">
+                        <label for="studentName">Full Name of Student</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-box">
+                            <label for="rollNo">Roll Number</label>
+                            <input type="text" id="rollNo" placeholder="e.g., 240101" required>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="department">Department</label>
+                            <select id="department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Computer Engineering">Computer Engineering</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Automobile Engineering">Automobile Engineering</option>
+                                <option value="Plastic Engineering">Plastic Engineering</option>
+                                <option value="Dress Designing & Garment Manufacturing">Dress Designing & Garment Manufacturing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Captcha Section -->
+                    <div class="row">
+                        <div class="input-box">
+                            <label>Verification Captcha</label>
+                            <div class="captcha-wrapper">
+                                <div class="captcha-display" id="captchaCode">XXXX</div>
+                                <button type="button" class="refresh-captcha" onclick="generateCaptcha()" title="Refresh Captcha">🔄</button>
+                            </div>
+                        </div>
+                        <div class="input-box">
+                            <label for="captchaInput">Enter Captcha</label>
+                            <input type="text" id="captchaInput" placeholder="Enter text shown on left" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn">SUBMIT REGISTRATION →</button>
+                </form>
+                <div class="note">
+                    Students can register here to explore gymkhana events, check schedules, and participate in sports activities.
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <div>© 2026 Government Polytechnic Nash</div>
+                <div>Secure Portal System</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Government Polytechnic Nashik Gymkhana Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Tab switching functionality 
+        function switchTab(panelId) {
+            document.querySelectorAll('.form-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(panelId).classList.add('active');
+            event.target.classList.add('active');
+
+            if(panelId === 'explore-panel') {
+                generateCaptcha();
+            }
+        }
+
+        // CAPTCHA Generation
+        let currentCaptcha = "";
+        function generateCaptcha() {
+            const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            let code = "";
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            currentCaptcha = code;
+            document.getElementById("captchaCode").innerText = code;
+        }
+
+        /* ADMIN AUTHENTICATION CONTROL */
+        document.getElementById("loginForm").addEventListener("submit", function(e){
+            e.preventDefault();
+
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            if(username === "gpn" && email === "gpnashik@gmail.ac.in" && password === "gpn123"){
+                alert("Login Successful");
+                window.location.href = "admin/admin-dashboard.html";
+            } else {
+                alert("Invalid Credentials");
+            }
+        });
+
+        /* STUDENT REGISTRATION FORM SUBMISSION */
+        document.getElementById("registrationForm").addEventListener("submit", function(e){
+            e.preventDefault();
+
+            let captchaInput = document.getElementById("captchaInput").value;
+
+            // Simple CAPTCHA Validation
+            if(captchaInput !== currentCaptcha) {
+                alert("Incorrect Captcha string! Please try again.");
+                generateCaptcha();
+                document.getElementById("captchaInput").value = "";
+                return;
+            }
+
+            let studentName = document.getElementById("studentName").value;
+            let rollNo = document.getElementById("rollNo").value;
+            let department = document.getElementById("department").value;
+
+            alert(`Registration Successful!\nWelcome ${studentName} (${rollNo}) from ${department} Department.`);
+            // Redirect or manage data forward from here
+            window.location.href = "student-dashboard.html"; 
+        });
+    </script>
+</body>
+</html>

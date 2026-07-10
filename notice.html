@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Notice Board - GP Nashik Gymkhana</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific layouts tailored to the Notice Board keeping your design language */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .notice-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .back-link {
+            margin-bottom: 24px;
+            display: inline-block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #818cf8;
+        }
+
+        .heading {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 35px;
+            background: linear-gradient(to right, #ffffff, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .notice-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .notice-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .notice-card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #818cf8;
+        }
+
+        .notice-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .heading {
+                font-size: 2rem;
+                margin-bottom: 25px;
+            }
+            .notice-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="gpnashik_logo.png" alt="Government Polytechnic Nashik Logo">
+            <div>
+                <h1>शासकीय तंत्रनिकेतन, नाशिक</h1>
+                <p>(An Autonomous Institute of Government of Maharashtra)</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Admin Panel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="notice-container">
+        <a href="index.html" class="back-link">← BACK TO HOME</a>
+
+        <h1 class="heading">College Notice Board</h1>
+
+        <div class="notice-card">
+            <h2>FY Admission Notice</h2>
+            <p>
+                First year admission process starts from 15 June 2026. 
+                Students should complete document verification timely.
+            </p>
+        </div>
+
+        <div class="notice-card">
+            <h2>Cultural Gathering Registration</h2>
+            <p>
+                Registration logs for singing, dancing, and anchoring events are currently open. 
+                Access the dashboard option to choose slots.
+            </p>
+        </div>
+
+        <div class="notice-card">
+            <h2>Sports Practice Schedule</h2>
+            <p>
+                Indoor and outdoor competitive sports practice sessions begin starting this Monday. 
+                Check system timetables for details.
+            </p>
+        </div>
+
+        <div class="notice-card">
+            <h2>CR Meeting Notice</h2>
+            <p>
+                All appointed Class Representatives (CR) must systematically attend the upcoming Gymkhana operational audit session.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Government Polytechnic Nashik Gymkhana Portal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

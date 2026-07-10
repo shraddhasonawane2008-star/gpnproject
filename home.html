@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymkhana Home - GP Nashik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Main page adjustments keeping design language layout strict */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* LIVE SCORE BAR */
+        .live-score {
+            background-color: var(--bg-secondary);
+            margin: 20px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .live-tag {
+            color: #ef4444;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* GRID AND CARDS */
+        .section-title {
+            margin: 40px 20px 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px 20px 20px;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .card h2 {
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #818cf8;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .card a:hover {
+            color: #a5b4fc;
+        }
+
+        /* STANDINGS TABLE */
+        .standings {
+            margin: 0 20px 20px 20px;
+            background-color: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 0.95rem;
+        }
+
+        .rank {
+            background-color: #eab308;
+            color: #0f172a;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* TIMETABLE SCHEDULE */
+        .schedule {
+            margin: 0 20px 20px 20px;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            color: var(--text-light);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .schedule h2 {
+            margin-bottom: 25px;
+            font-size: 1.75rem;
+            font-weight: 800;
+        }
+
+        .event {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .event:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .time {
+            color: #818cf8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .event h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* CAMPUS GALLERY */
+        .gallery-section {
+            padding: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery-card {
+            background-color: var(--bg-secondary);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            height: 280px;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .view-more-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .view-more-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        /* INTERFACE RESPONSIVENESS */
+        @media(max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-card {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="gpnashik_logo.png" alt="Government Polytechnic Nashik Logo">
+            <div>
+                <h1>शासकीय तंत्रनिकेतन, नाशिक</h1>
+                <p>(An Autonomous Institute of Government of Maharashtra)</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="notice.html">Notice Board</a></li>
+                <li><a href="admin.html">Admin Panel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <h1>Welcome to Gymkhana 2026</h1>
+        <p>
+            The official digital portal for managing sports sessions, cultural gatherings, 
+            and student representative elections at Government Polytechnic, Nashik.
+        </p>
+      
+    </section>
+    <div class="section-title">Operational Modules</div>
+    <div class="cards">
+        <div class="card">
+            <h2>SPORTS SESSION</h2>
+            <p>Track matches, manage team participants, and view real-time live scoreboards across departments.</p>
+            <a href="gymkhana-sports/sports-dashboard.html">ACCESS MODULE →</a>
+        </div>
+
+        <div class="card">
+            <h2>CULTURAL GATHERING</h2>
+            <p>Register online for singing, dancing, drama, and anchoring events scheduled for the gathering.</p>
+            <a href="gymkhana%20event/eventhome.html">ACCESS MODULE →</a>
+        </div>
+
+        <div class="card">
+            <h2>VOTING SYSTEM</h2>
+            <p>Exclusive secure election authentication gateway for casting Gymkhana Secretary and CR votes.</p>
+            <a href="gymkhana voting/indexx.html">ACCESS MODULE →</a>
+        </div>
+    </div>
+
+    <div class="section-title">Important Bulletins</div>
+    <div class="cards">
+        <div class="card">
+            <h2>NOTICE BOARD</h2>
+            <p>View latest college notices including admission schedules, gymkhana announcements, and student updates.</p>
+            <a href="notice.html">OPEN NOTICE BOARD →</a>
+        </div>
+
+        <div class="card">
+            <h2>ACADEMIC CALENDAR</h2>
+            <p>Access and download the official academic structural milestone calendar for the session.</p>
+            <a href="academic-calendar.pdf" target="_blank">VIEW CALENDAR →</a>
+        </div>
+
+        <div class="card">
+            <h2>DEPARTMENT TIMETABLE</h2>
+            <p>Browse individual academic departments and download their latest updated class timetable PDFs.</p>
+            <a href="timetable.html">VIEW TIMETABLES →</a>
+        </div>
+    </div>
+
+    
+
+    <div class="schedule">
+        <h2>Upcoming Schedule</h2>
+        <div class="event">
+            <div class="time">10:00 AM</div>
+            <h3>CR Verification Audit</h3>
+        </div>
+        <div class="event">
+            <div class="time">02:00 PM</div>
+            <h3>Football Prelims</h3>
+        </div>
+        <div class="event">
+            <div class="time">04:30 PM</div>
+            <h3>Solo Singing Auditions</h3>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <div class="section-title" style="margin: 20px 0; text-align: center;">Campus Gallery</div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src="gymkhana-home/gallery1.jpg" alt="Gymkhana Event Ground Layout">
+            </div>
+            <div class="gallery-card">
+                <img src="gymkhana-home/gallery2.jpg" alt="Indoor Sports Arena Facility">
+            </div>
+        </div>
+        <div class="view-more-box">
+            <a href="gallery.html" class="view-more-btn">View More Images</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Government Polytechnic Nashik Gymkhana Portal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
